@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using CS321_W2D2_StudentAPI.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CS321_W2D2_StudentAPI.Services
 {
@@ -58,11 +62,13 @@ namespace CS321_W2D2_StudentAPI.Services
         public Student Get(int id)
         {
             // return the specified Student or null if not found
+            return _students.FirstOrDefault(i => i.Id == id);
         }
 
         public IEnumerable<Student> GetAll()
         {
             // return all students
+            return _students;
         }
 
         public Student Update(Student updatedStudent)
@@ -74,11 +80,13 @@ namespace CS321_W2D2_StudentAPI.Services
             // copy the property values from the updated student into the current student object
 
             // return student
+            return students;
         }
 
         public void Remove(Student student)
         {
             // remove student
+            Remove(student.Id);
         }
     }
 }
