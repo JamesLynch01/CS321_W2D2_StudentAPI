@@ -74,19 +74,26 @@ namespace CS321_W2D2_StudentAPI.Services
         public Student Update(Student updatedStudent)
         {
             // get the Student object in the current list with this id 
+            var currentStudent = Get(updatedStudent.Id);
 
             // return null if item to update isn't found
+            if (currentStudent == null) return null;
 
             // copy the property values from the updated student into the current student object
+            currentStudent.FirstName = updatedStudent.FirstName;
+            currentStudent.LastName = updatedStudent.LastName;
+            currentStudent.BirthDate = updatedStudent.BirthDate;
+            currentStudent.Phone = updatedStudent.Phone;
+            currentStudent.Email = updatedStudent.Email;
 
             // return student
-            return students;
+            return currentStudent;
         }
 
         public void Remove(Student student)
         {
             // remove student
-            Remove(student.Id);
+            _students.Remove(student);
         }
     }
 }
